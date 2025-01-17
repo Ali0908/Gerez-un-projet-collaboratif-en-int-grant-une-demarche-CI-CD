@@ -1,4 +1,4 @@
-name: Run tests, coverage, and SonarQube analysis backend
+name: CI-CD backend Tests, Coverage, Quality Analysis
 
 on:
   push:
