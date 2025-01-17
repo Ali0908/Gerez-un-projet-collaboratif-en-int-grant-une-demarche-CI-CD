@@ -3,13 +3,9 @@ name: CI-CD backend Tests, Coverage, Quality Analysis
 on:
   push:
     branches:
-      - develop
-    paths:
-      - 'back/**'
-      - '.github/workflows/backend-tests.yml'
-  pull_request:
-    branches:
       - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
     paths:
       - 'back/**'
       - '.github/workflows/backend-tests.yml'
