@@ -1,4 +1,4 @@
-name: Run tests and coverage frontend
+name: CI-CD Frontend Tests, Coverage, Quality Analysis
 
 on:
   push:
@@ -50,7 +50,7 @@ jobs:
           name: frontend-test-results
           path: front/coverage
 
-  sonarqube:
+  sonarcloud-analysis:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
     steps:
