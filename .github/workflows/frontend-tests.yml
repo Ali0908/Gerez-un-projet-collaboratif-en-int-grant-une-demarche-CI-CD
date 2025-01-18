@@ -76,7 +76,7 @@ jobs:
           args: >
             -Dsonar.projectKey=ali0908_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD_1
             -Dsonar.organization=ali0908
-            -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.test.inclusions=src/**/*.spec.ts
+            -Dsonar.sources=./src
+            -Dsonar.tests=./src
+            -Dsonar.test.inclusions=./src/**/*.spec.ts
             -Dsonar.sourceEncoding=UTF-8
