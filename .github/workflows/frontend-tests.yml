@@ -4,12 +4,8 @@ on:
   push:
     branches:
       - develop
-    paths:
-      - 'front/**'
-      - '.github/workflows/frontend-tests.yml'
   pull_request:
-    branches:
-      - main
+    types: [ opened, synchronize, reopened ]
     paths:
       - 'front/**'
       - '.github/workflows/frontend-tests.yml'
