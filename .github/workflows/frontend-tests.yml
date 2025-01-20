@@ -1,4 +1,4 @@
-name: CI-CD Frontend Tests, Coverage, Quality Analysi
+name: CI-CD Frontend Tests, Coverage, Quality Analysis
 
 on:
   push:
