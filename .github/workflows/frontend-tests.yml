@@ -86,7 +86,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: /home/user/Documents/oc/projects/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/front
-          file: /home/user/Documents/oc/projects/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/front/Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           tags: user/app:latest
