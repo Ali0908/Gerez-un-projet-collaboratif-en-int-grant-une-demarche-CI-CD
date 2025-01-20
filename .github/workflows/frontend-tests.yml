@@ -1,15 +1,11 @@
-name: Run tests and coverage frontend
+name: CI-CD Frontend Tests, Coverage, Quality Analysis
 
 on:
   push:
     branches:
-      - develop
-    paths:
-      - 'front/**'
-      - '.github/workflows/frontend-tests.yml'
-  pull_request:
-    branches:
       - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
     paths:
       - 'front/**'
       - '.github/workflows/frontend-tests.yml'
@@ -50,9 +46,12 @@ jobs:
           name: frontend-test-results
           path: front/coverage
 
-  sonarqube:
+  sonarcloud-analysis:
     name: SonarQube Analysis
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
     steps:
       - uses: actions/checkout@v3
         with:
