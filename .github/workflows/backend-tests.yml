@@ -1,4 +1,4 @@
-name: CI-CD backend Tests, Coverage, Quality Analysis
+name: CI-CD backend Tests, Coverage, Quality Analysis, Docker Build and Push
 
 on:
   push:
