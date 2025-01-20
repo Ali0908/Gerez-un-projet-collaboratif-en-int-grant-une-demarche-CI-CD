@@ -72,11 +72,3 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
-        with:
-          args: >
-            -Dsonar.projectKey=ali0908_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD_1
-            -Dsonar.organization=ali0908
-            -Dsonar.sources=/home/user/Documents/oc/projects/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/front/src
-            -Dsonar.tests=/home/user/Documents/oc/projects/P10/Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD/front/src
-            -Dsonar.test.inclusions=**/*.spec.ts
-            -Dsonar.sourceEncoding=UTF-8
