@@ -3,7 +3,7 @@ name: CI-CD Frontend Tests, Coverage, Quality Analysi
 on:
   push:
     branches:
-      - main
+      - develop
   pull_request:
     types: [ opened, synchronize, reopened ]
     paths:
