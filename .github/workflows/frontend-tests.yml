@@ -86,7 +86,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: front
-          file: front/Dockerfile
+          context: "{{defaultContext}}:mysubdir"
           push: true
           tags: user/app:latest
