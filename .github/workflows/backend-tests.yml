@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: backend-test-results
-          path: target/site/jacoco
+          path: back/target/site/jacoco
 
   sonarcloud-analysis:
     needs: backend-tests
