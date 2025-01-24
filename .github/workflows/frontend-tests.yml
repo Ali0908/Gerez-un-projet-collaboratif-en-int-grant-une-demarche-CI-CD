@@ -47,6 +47,7 @@ jobs:
           path: front/coverage
 
   sonarcloud-analysis:
+    needs: frontend-tests
     name: SonarQube Analysis
     runs-on: ubuntu-latest
     defaults:
@@ -69,6 +70,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
   docker:
+    needs: sonarcloud-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

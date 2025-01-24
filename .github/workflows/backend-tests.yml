@@ -48,6 +48,7 @@ jobs:
           path: target/site/jacoco
 
   sonarcloud-analysis:
+    needs: backend-tests
     name: SonarCloud Analysis
     runs-on: ubuntu-latest
     defaults:
@@ -79,6 +80,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ali0908_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD -Dsonar.projectName=back-CI-CD
   docker:
+    needs: sonarcloud-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
