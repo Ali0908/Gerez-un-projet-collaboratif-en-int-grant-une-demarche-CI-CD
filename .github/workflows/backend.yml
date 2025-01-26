@@ -1,4 +1,4 @@
-name: CI-CD backend Tests, Coverage, Quality Analysis, Docker Build and Push
+name: CI-CD backend Tests, Coverage, Code Quality Analysis and  Deploy Docker Image
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
     types: [ opened, synchronize, reopened ]
     paths:
       - 'back/**'
-      - '.github/workflows/backend-tests.yml'
+      - 'backend.yml'
 
 jobs:
-  backend-tests:
+  tests:
     name: Backend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -47,9 +47,9 @@ jobs:
           name: backend-test-results
           path: back/target/site/jacoco
 
-  sonarcloud-analysis:
-    needs: backend-tests
-    name: SonarCloud Analysis
+  code-quality-analysis:
+    needs: tests
+    name: Backend Code Quality Analysis with SonarCloud
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -79,8 +79,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ali0908_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD -Dsonar.projectName=back-CI-CD
-  docker:
-    needs: sonarcloud-analysis
+  deploy-images:
+    needs: code-quality-analysis
+    name: Deploy Backend Docker Image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -100,4 +101,4 @@ jobs:
           context: ./back
           file: ./back/Dockerfile
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/bobapp-back:latest

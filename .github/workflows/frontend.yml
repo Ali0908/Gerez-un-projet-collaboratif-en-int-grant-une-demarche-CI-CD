@@ -1,4 +1,4 @@
-name: CI-CD Frontend Tests, Coverage, Quality Analysis, Docker Build and Push
+name: CI-CD Frontend Tests, Coverage, Code Quality Analysis and  Deploy Docker Image
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
     types: [ opened, synchronize, reopened ]
     paths:
       - 'front/**'
-      - '.github/workflows/frontend-tests.yml'
+      - 'frontend.yml'
 
 jobs:
-  frontend-tests:
+  tests:
     name: Frontend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -46,9 +46,9 @@ jobs:
           name: frontend-test-results
           path: front/coverage
 
-  sonarcloud-analysis:
-    needs: frontend-tests
-    name: SonarQube Analysis
+  code-quality-analysis:
+    needs: tests
+    name: Frontend Code Quality Analysis with SonarCloud
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -69,8 +69,9 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
-  docker:
-    needs: sonarcloud-analysis
+  deploy-images:
+    name: Deploy Frontend Docker Image
+    needs: code-quality-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -90,4 +91,4 @@ jobs:
           context: ./front
           file: ./front/Dockerfile
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/app:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/bobapp-front:latest
